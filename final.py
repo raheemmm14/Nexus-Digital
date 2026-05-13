@@ -5,8 +5,7 @@ import time
 import base64
 import io
 import openpyxl
-from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
-from openpyxl.utils import get_column_letter
+from openpyxl.styles import Font
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -415,6 +414,19 @@ def load_10_10_css():
             color: var(--text-muted);
             opacity: 0.6;
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-headline { font-size: 2.5rem; letter-spacing: -1px; }
+            .hero-subhead { font-size: 1rem; margin-bottom: 2rem; }
+            .gradient-stat { font-size: 3.5rem; }
+            .bento-card { padding: 20px; margin-bottom: 15px; }
+            .social-proof { gap: 15px; font-size: 0.75rem; flex-wrap: wrap; justify-content: center; padding: 20px 0; }
+            .social-proof i { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            .section-subtitle { font-size: 1rem; margin-bottom: 2rem; }
+            .footer { padding: 20px 0; font-size: 0.75rem; }
+        }
     </style>
     """, unsafe_allow_html=True)
 
@@ -723,6 +735,31 @@ if st.session_state.page == "Main App":
             text-align: center;
             margin-top: 10px;
             font-size: 1.05rem;
+        }
+
+        /* Mobile Swipe Carousel for Resumes */
+        @media (max-width: 768px) {
+            [data-testid="stHorizontalBlock"]:has(.resume-float-wrapper) {
+                display: flex !important;
+                flex-direction: row !important;
+                width: 100% !important;
+                overflow: hidden !important;
+                gap: 0 !important;
+            }
+            [data-testid="stHorizontalBlock"]:has(.resume-float-wrapper) > [data-testid="column"] {
+                min-width: 100% !important;
+                width: 100% !important;
+                flex: 0 0 100% !important;
+                animation: mobileSwipe 12s infinite cubic-bezier(0.8, 0, 0.2, 1) !important;
+                padding: 0 10px !important;
+            }
+            @keyframes mobileSwipe {
+                0%, 20% { transform: translateX(0); }
+                25%, 45% { transform: translateX(-100%); }
+                50%, 70% { transform: translateX(-200%); }
+                75%, 95% { transform: translateX(-300%); }
+                100% { transform: translateX(0); }
+            }
         }
     </style>
     """, unsafe_allow_html=True)
